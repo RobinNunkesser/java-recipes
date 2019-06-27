@@ -1,6 +1,8 @@
 package de.hshl.isd.bottomnavigation;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -9,7 +11,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        SecondLevelFragment.OnFragmentInteractionListener {
 
     private NavController mNavController;
     private BottomNavigationView mNavView;
@@ -25,4 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        Log.i("MainActivity", "Received ${value}");
+    }
 }
