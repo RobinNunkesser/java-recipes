@@ -1,6 +1,5 @@
 package de.hshl.isd.bottomnavigation;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity implements
         SecondLevelFragment.OnFragmentInteractionListener {
 
+    public static final String TAG = "MainActivity";
     private NavController mNavController;
     private BottomNavigationView mNavView;
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-        Log.i("MainActivity", "Received ${value}");
+    public void onFragmentInteraction(String value) {
+        Log.i(TAG, "Received " + value);
     }
 }
