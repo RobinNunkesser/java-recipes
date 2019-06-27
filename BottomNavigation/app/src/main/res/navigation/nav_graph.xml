@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation android:id="@+id/nav_graph"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="de.hshl.isd.bottomnavigation.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard"/>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="de.hshl.isd.bottomnavigation.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_secondLevelFragment"
+            app:destination="@id/secondLevelFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="de.hshl.isd.bottomnavigation.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications"/>
+    <fragment
+        android:id="@+id/secondLevelFragment"
+        android:name="de.hshl.isd.bottomnavigation.SecondLevelFragment"
+        android:label="fragment_second_level"
+        tools:layout="@layout/fragment_second_level"/>
+</navigation>
