@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import de.hshl.isd.list.dummy.DummyContent;
 
 public class MainActivity extends AppCompatActivity implements
         ItemFragment.OnListFragmentInteractionListener {
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(String item) {
         Log.i("MainActivity", "Clicked " + item);
     }
 }

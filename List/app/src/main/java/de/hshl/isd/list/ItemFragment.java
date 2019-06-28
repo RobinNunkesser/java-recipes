@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import de.hshl.isd.list.dummy.DummyContent;
-import de.hshl.isd.list.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
@@ -21,8 +24,9 @@ import de.hshl.isd.list.dummy.DummyContent.DummyItem;
  */
 public class ItemFragment extends Fragment {
 
-    // TODO: Customize parameters
     private int mColumnCount = 1;
+    private ListAdapter<String, MyItemRecyclerViewAdapter.ViewHolder> mAdapter;
+    private ItemViewModel mViewModel;
 
     private OnListFragmentInteractionListener mListener;
 
@@ -45,8 +49,18 @@ public class ItemFragment extends Fragment {
         View view =
                 inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        // Set the adapter
+        mAdapter = new MyItemRecyclerViewAdapter(mListener);
+
+        mViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
+        mViewModel.getData().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                mAdapter.submitList(strings);
+            }
+        });
+
         if (view instanceof RecyclerView) {
+
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
@@ -56,12 +70,10 @@ public class ItemFragment extends Fragment {
                         new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(
-                    new MyItemRecyclerViewAdapter(DummyContent.ITEMS,
-                            mListener));
+                    mAdapter);
         }
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -85,13 +97,8 @@ public class ItemFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(String item);
     }
 }
