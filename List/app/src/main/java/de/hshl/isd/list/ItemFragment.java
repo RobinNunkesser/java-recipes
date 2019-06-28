@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class ItemFragment extends Fragment {
 
-    private int mColumnCount = 1;
     private ListAdapter<String, MyItemRecyclerViewAdapter.ViewHolder> mAdapter;
     private ItemViewModel mViewModel;
 
@@ -59,19 +60,44 @@ public class ItemFragment extends Fragment {
             }
         });
 
-        if (view instanceof RecyclerView) {
-
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(
-                        new GridLayoutManager(context, mColumnCount));
-            }
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView
+                .setLayoutManager(new LinearLayoutManager(view.getContext()));
             recyclerView.setAdapter(
                     mAdapter);
-        }
+
+        ((SearchView) view.findViewById(R.id.searchView))
+                .setOnQueryTextListener(
+                        new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String s) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onQueryTextChange(final String s) {
+                                if (s.isEmpty()) {
+                                    mAdapter.submitList(
+                                            mViewModel.getData().getValue());
+                                    return false;
+                                }
+                                List filteredList =
+                                        mViewModel.getData().getValue().stream()
+                                                .filter(new Predicate<String>() {
+                                                    @Override
+                                                    public boolean test(
+                                                            String value) {
+                                                        return value
+                                                                .toLowerCase()
+                                                                .contains(
+                                                                        s.toLowerCase());
+                                                    }
+                                                }).collect(
+                                                Collectors.toList());
+                                mAdapter.submitList(filteredList);
+                                return false;
+                            }
+                        });
         return view;
     }
 
