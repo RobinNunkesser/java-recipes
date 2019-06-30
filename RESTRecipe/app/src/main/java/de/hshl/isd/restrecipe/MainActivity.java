@@ -1,15 +1,15 @@
 package de.hshl.isd.restrecipe;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.HttpUrl;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "MainActivity";
 
