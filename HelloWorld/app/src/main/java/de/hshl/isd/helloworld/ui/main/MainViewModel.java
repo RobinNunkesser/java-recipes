@@ -1,14 +1,14 @@
-package de.hshl.isd.helloworld;
+package de.hshl.isd.helloworld.ui.main;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
-    private MutableLiveData<String> data = new MutableLiveData<String>();
+    private final MutableLiveData<String> data = new MutableLiveData<>();
 
     public MainViewModel() {
-        this.data.setValue("Hello world");
+        this.data.setValue("Hello ViewModel world");
     }
 
     public LiveData<String> getData() {
