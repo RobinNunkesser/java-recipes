@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MVVMRecipe</string>
+    <string name="hint_forename">Forename</string>
+    <string name="hint_surname">Surname</string>
+    <string name="label_forename">Your forename is:</string>
+    <string name="label_surname">Your surname is:</string>
+    <string name="label_name">Your name is:</string>
+    <string name="label_computed_name">Your computed name is:</string>
+    <string name="button_reset">Reset</string>
+    <string name="button_compute_name">Compute Name</string>
+</resources>
