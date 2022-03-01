@@ -1,6 +1,7 @@
 package de.hshl.isd.placeholderposts.infrastructure;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -12,17 +13,17 @@ import retrofit2.http.Path;
 
 public interface JSONPlaceholderAPI {
     @GET("posts/{id}")
-    Call<PlaceholderPost> readPost(@Path("id") Long id);
+    CompletableFuture<PlaceholderPost> readPost(@Path("id") Long id);
 
     @GET("posts")
-    Call<List<PlaceholderPost>> readAllPosts();
+    CompletableFuture<List<PlaceholderPost>> readAllPosts();
 
     @POST("posts")
-    Call<PlaceholderPost> createPost(@Body PlaceholderPost post);
+    CompletableFuture<PlaceholderPost> createPost(@Body PlaceholderPost post);
 
     @PUT("posts/{id}")
-    Call<PlaceholderPost> updatePost(@Path("id") Long id, @Body PlaceholderPost post);
+    CompletableFuture<PlaceholderPost> updatePost(@Path("id") Long id, @Body PlaceholderPost post);
 
     @DELETE("posts/{id}")
-    Call<Void> deletePost(@Path("id") Long id);
+    CompletableFuture<Void> deletePost(@Path("id") Long id);
 }

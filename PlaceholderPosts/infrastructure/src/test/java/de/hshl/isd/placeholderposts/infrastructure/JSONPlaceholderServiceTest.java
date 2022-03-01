@@ -2,6 +2,7 @@ package de.hshl.isd.placeholderposts.infrastructure;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +21,9 @@ public class JSONPlaceholderServiceTest {
     @Test
     public void readAllPosts() {
         try {
-            List<PlaceholderPost> posts = service.readAllPosts().execute().body();
+            List<PlaceholderPost> posts = service.readAllPosts().get();
             assertEquals(100, posts.size());
-        } catch (IOException e) {
+        } catch (Exception e) {
             fail(e.getLocalizedMessage());
         }
     }
