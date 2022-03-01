@@ -8,11 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import de.hshl.isd.placeholderposts.R;
+import de.hshl.isd.placeholderposts.core.ConcreteGetPostCommand;
+import de.hshl.isd.placeholderposts.core.ports.GetPostCommand;
+import de.hshl.isd.placeholderposts.infrastructure.adapters.PostRepositoryAdapter;
 
 public class MainFragment extends Fragment {
 
@@ -35,6 +39,9 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // TODO: Use the ViewModel
+
+        GetPostCommand service = new ConcreteGetPostCommand(new PostRepositoryAdapter());
+        service.execute(new ConcretePostIDDTO(1)).thenApply(result -> Log.d("MainFragment", result));
     }
 
 }

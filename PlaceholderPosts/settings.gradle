@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "PlaceholderPosts"
 include ':app'
 include ':infrastructure'
+include ':core'

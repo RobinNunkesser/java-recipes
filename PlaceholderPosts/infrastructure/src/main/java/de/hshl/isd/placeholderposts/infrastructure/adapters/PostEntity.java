@@ -1,12 +1,14 @@
-package de.hshl.isd.placeholderposts.infrastructure;
+package de.hshl.isd.placeholderposts.infrastructure.adapters;
 
-public class PlaceholderPost {
+import de.hshl.isd.placeholderposts.core.ports.Post;
+
+class PostEntity implements Post {
     private long userId;
     private long id;
     private String title;
     private String body;
 
-    public PlaceholderPost(long id, long userId, String title,
+    public PostEntity(long id, long userId, String title,
             String body) {
         this.userId = userId;
         this.id = id;
@@ -14,35 +16,23 @@ public class PlaceholderPost {
         this.body = body;
     }
 
+    @Override
     public long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
+    @Override
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    @Override
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    @Override
     public String getBody() {
         return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
     }
 }

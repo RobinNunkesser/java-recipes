@@ -6,7 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class JSONPlaceholderService implements JSONPlaceholderAPI {
+public class JSONPlaceholderService implements JSONPlaceholderAPI {
 
     JSONPlaceholderAPI service;
 
